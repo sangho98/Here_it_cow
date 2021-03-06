@@ -16,6 +16,7 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
         mHandler.postDelayed(()->{
             Intent intent = new Intent(getApplicationContext(),PermissionActivity.class);
+//            Intent intent = new Intent(getApplicationContext(),BluetoothActivity.class);
             startActivity(intent);
             finish();
         },2000);

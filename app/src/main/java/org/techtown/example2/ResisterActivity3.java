@@ -87,6 +87,7 @@ public class ResisterActivity3 extends AppCompatActivity implements VariableInte
     }
     public void onNext(View v){
 
+
         EditText name = (EditText) findViewById(R.id.Name);
         EditText birth = (EditText) findViewById(R.id.Birthday);
         EditText carselect = (EditText) findViewById(R.id.carselect);

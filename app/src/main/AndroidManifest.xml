@@ -12,11 +12,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Example2.NoActionBar">
+        <activity android:name=".BluetoothActivity"></activity>
         <activity
             android:name=".HomeActivity"
             android:label="@string/title_activity_home"
-            android:theme="@style/Theme.Example2.NoActionBar.NoActionBar"></activity>
-
+            android:theme="@style/Theme.Example2.NoActionBar.NoActionBar" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".ResisterActivity" />
         <activity android:name=".ResisterActivity2" />
@@ -28,7 +28,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".PermissionActivity"/>
+        <activity android:name=".PermissionActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".Location" />
     </application>
