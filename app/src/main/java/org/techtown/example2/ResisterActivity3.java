@@ -107,7 +107,7 @@ public class ResisterActivity3 extends AppCompatActivity implements VariableInte
 
     public void onJoin(){
 
-        String url = "http://140.238.26.22/join";
+        String url = "http://hereitcow.ga/join";
         HashMap<String, String> map = new HashMap<>();
 
         map.put("ID",RegInfo.get(0));
