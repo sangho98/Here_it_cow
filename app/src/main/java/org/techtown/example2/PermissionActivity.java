@@ -2,6 +2,7 @@ package org.techtown.example2;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.bluetooth.BluetoothAdapter;
 import android.os.Bundle;
 
 import android.Manifest;
@@ -37,7 +38,8 @@ public class PermissionActivity extends AppCompatActivity {
             ActivityCompat.requestPermissions(this, PERMISSIONS, MULTIPLE_PERMISSION);
         } else {
             /*..권한이 있는경우 실행할 코드....*/
-            Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
+//            Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
+            Intent intent = new Intent(getApplicationContext(),BluetoothActivity.class);
             startActivity(intent);
             finish();
         }
@@ -63,7 +65,8 @@ public class PermissionActivity extends AppCompatActivity {
             case MULTIPLE_PERMISSION:
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     /*..권한이 있는경우 실행할 코드....*/
-                    Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
+//                    Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), BluetoothAdapter.class);
                     startActivity(intent);
                     finish();
                 } else {
