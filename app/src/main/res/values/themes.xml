@@ -27,7 +27,11 @@
     <style name="DrawerArrowStyle" parent ="Widget.AppCompat.DrawerArrowToggle">
         <item name="color">@color/purple_700</item>
     </style>
+    <style name="MyCustomDialogStyle" parent="@android:style/Theme.DeviceDefault.Dialog.NoActionBar.MinWidth">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:typeface">monospace</item>
 
+    </style>
     <style name="Theme.Example2.NoActionBar.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.Example2.NoActionBar.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />

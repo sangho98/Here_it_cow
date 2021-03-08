@@ -1,15 +1,24 @@
 package org.techtown.example2;
 
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.view.View;
+import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import java.util.HashMap;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class LoginActivity extends AppCompatActivity implements VariableInterface{
 
@@ -42,7 +51,7 @@ public class LoginActivity extends AppCompatActivity implements VariableInterfac
 
         // 추가 사항 -> id 나 pwd가 공백일시 toast 메시지 출력
 
-        String url = "http://140.238.26.22/login";
+        String url = "http://hereitcow.ga/login";
         HashMap<String, String> map = new HashMap<>();
 
         map.put("ID",ID);
@@ -61,4 +70,43 @@ public class LoginActivity extends AppCompatActivity implements VariableInterfac
 
         }
     }
+    public void onPopup(View v)
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this, R.style.MyCustomDialogStyle);
+        builder.setMessage("메세지를 보냅니다.");
+        builder.setPositiveButton("닫기", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        builder.setTitle("경고");
+        builder.setIcon(R.drawable.warming);
+        AlertDialog ad = builder.create();
+        ad.show();
+        //ad.getWindow().setBackgroundDrawable(new ColorDrawable(Color.argb(255,62,79,92)));
+        ad.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+        Button nbotton = ad.getButton(DialogInterface.BUTTON_POSITIVE);
+        nbotton.setTextColor(Color.WHITE);
+
+
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                TimerTask task = new TimerTask() {
+                    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+                    @Override
+                    public void run() {
+                        ad.dismiss();
+                    }
+                };
+                Timer timer = new Timer();
+                timer.schedule(task,3000);
+            }
+        });
+        thread.start();
+    }
+
+
+
 }
