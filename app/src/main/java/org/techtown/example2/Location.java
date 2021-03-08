@@ -22,15 +22,15 @@ import java.util.List;
 import java.util.Locale;
 
 public class Location extends AppCompatActivity {
-
+    public String location = null;
     private int MY_PERMISSIONS_REQUEST_LOCATION = 10;
     TextView status, status2;
-
+    public static  Context context_main;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
+        context_main = this;
 
         setContentView(R.layout.activity_location);
         status = findViewById(R.id.status);
@@ -63,12 +63,11 @@ public class Location extends AppCompatActivity {
     }
 
     public void cilckout(View view) {
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
         finish();
     }
     public void getLocation(double lat, double lng){
-        String str = null;
         Geocoder geocoder = new Geocoder(this, Locale.KOREA);
 
         List<Address> address;
@@ -76,14 +75,14 @@ public class Location extends AppCompatActivity {
             if (geocoder != null) {
                 address = geocoder.getFromLocation(lat, lng, 1);
                 if (address != null && address.size() > 0) {
-                    str = address.get(0).getAddressLine(0).toString();
+                    location = address.get(0).getAddressLine(0).toString();
                 }
             }
         } catch (IOException e) {
             Log.e("MainActivity", "주소를 찾지 못하였습니다.");
             e.printStackTrace();
         }
-        status2.setText("주소 : " + str);
+        status2.setText("주소 : " + location);
     }
 
 }
