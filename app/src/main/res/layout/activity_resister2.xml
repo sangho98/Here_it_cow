@@ -34,7 +34,7 @@
         android:layout_marginBottom="373dp"
         android:ems="10"
         android:hint="전화번호를 - 없이 입력해 주세요"
-        android:inputType="textPersonName"
+        android:inputType="phone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
