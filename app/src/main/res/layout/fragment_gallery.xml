@@ -52,6 +52,7 @@
         android:layout_marginEnd="159dp"
         android:layout_marginRight="159dp"
         android:text="문의하기"
+        app:backgroundTint="#C8C89D9D"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.501"
