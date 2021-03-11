@@ -23,14 +23,15 @@ import java.util.Locale;
 
 public class Location extends AppCompatActivity {
     public String location = null;
+    public Double v = null;
+    public Double v1 = null;
     private int MY_PERMISSIONS_REQUEST_LOCATION = 10;
     TextView status, status2;
     public static  Context context_main;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        context_main = this;
 
         setContentView(R.layout.activity_location);
         status = findViewById(R.id.status);
@@ -41,10 +42,13 @@ public class Location extends AppCompatActivity {
         LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
         LocationListener locationListener = new LocationListener() {
             public void onLocationChanged(android.location.Location location) {
+
                 status.setText("위도: " + location.getLatitude() + "\n경도:"
                         + location.getLongitude() + "\n고도:"
                         + location.getAltitude());
                 getLocation(location.getLatitude(), location.getLongitude());
+                getLatitude(location.getLatitude());
+                getLogitude(location.getLongitude());
             }
 
             public void onStatusChanged(String provider, int status,
@@ -60,12 +64,16 @@ public class Location extends AppCompatActivity {
         };
 
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 100, locationListener);
+        context_main = this;
     }
 
     public void cilckout(View view) {
         Intent intent = new Intent(this, LoginActivity.class);
+
         startActivity(intent);
+
         finish();
+
     }
     public void getLocation(double lat, double lng){
         Geocoder geocoder = new Geocoder(this, Locale.KOREA);
@@ -83,6 +91,13 @@ public class Location extends AppCompatActivity {
             e.printStackTrace();
         }
         status2.setText("주소 : " + location);
+    }
+    public void getLatitude(double lat){
+        v = lat;
+        Toast.makeText(getApplicationContext(),Double.toString(v),Toast.LENGTH_SHORT).show();
+    }
+    public void getLogitude(double log){
+        v1 = log;
     }
 
 }
