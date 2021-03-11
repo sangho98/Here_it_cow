@@ -31,14 +31,14 @@ import java.util.HashMap;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class LoginActivity extends AppCompatActivity implements VariableInterface{
+public class LoginActivity extends BluetoothActivity implements VariableInterface{
     private static final int SMS_SEND_PERMISSON = 1;
     SmsManager mSMSManager;
     Button btnSend;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+       // setContentView(R.layout.activity_login);
         mSMSManager = SmsManager.getDefault();
         btnSend = (Button) findViewById(R.id.sms);
         //권한이 부여되어 있는지 확인
@@ -64,6 +64,11 @@ public class LoginActivity extends AppCompatActivity implements VariableInterfac
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
         }
+    }
+
+    @Override
+    int setLayout() {
+        return R.layout.activity_login;
     }
     public void sendSms() {
         String phoneNo = "01041565974";
