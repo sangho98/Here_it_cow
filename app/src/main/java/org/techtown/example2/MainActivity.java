@@ -29,9 +29,4 @@ public class MainActivity extends AppCompatActivity {
         viewPager.setAdapter(fragmentPagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
     }
-    public void clicklocation(View view){
-        Intent intent = new Intent(this, Location.class);
-        startActivity(intent);
-        finish();
-    }
 }

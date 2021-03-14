@@ -118,20 +118,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.953" />
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="102dp"
-        android:layout_height="42dp"
-        android:layout_marginBottom="18dp"
-        android:text="location"
-        android:textSize="4pt"
-        android:onClick="clicklocation"
-        app:backgroundTint="#585B8F"
-        app:layout_constraintBottom_toTopOf="@+id/tab_layout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.652"
-        app:layout_constraintStart_toEndOf="@+id/imageView3"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

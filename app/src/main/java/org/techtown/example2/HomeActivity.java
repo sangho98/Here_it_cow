@@ -3,7 +3,12 @@ package org.techtown.example2;
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
@@ -21,6 +26,8 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.navigation.NavController;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.Toast;
+
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -34,6 +41,10 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.Locale;
 
 public class HomeActivity extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration;
@@ -56,8 +67,6 @@ public class HomeActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
-
-
 
     }
 

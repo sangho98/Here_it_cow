@@ -16,6 +16,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.StrictMode;
@@ -25,6 +26,8 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import org.techtown.example2.ui.slideshow.SlideshowFragment;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -67,7 +70,7 @@ public class LoginActivity extends AppCompatActivity implements VariableInterfac
     }
     public void sendSms() {
         String phoneNo = "01041565974";
-        String sms = ((Location)Location.context_main).location;
+        String sms = ((SlideshowFragment)SlideshowFragment.context_main).location2;
         try {
             SmsManager smsManager = SmsManager.getDefault();
             smsManager.sendTextMessage(phoneNo, null, sms, null, null);
