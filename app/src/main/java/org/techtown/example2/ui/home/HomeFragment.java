@@ -2,10 +2,12 @@ package org.techtown.example2.ui.home;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -90,6 +92,9 @@ public class HomeFragment extends Fragment {
         {
             e.printStackTrace();
         }
+        TextView gongji = root.findViewById(R.id.gongji);
+        gongji.setText("아아아아아아아아아아아   와와와와오아ㅗㅇㅇ아앙   ㅇ리리릴리ㅣ리리");
+        gongji.setSelected(true);
 
         return root;
     }
@@ -102,5 +107,7 @@ public class HomeFragment extends Fragment {
         }
         return nValue.getNodeValue();
     }
+
+
 
 }
