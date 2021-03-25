@@ -173,8 +173,8 @@ public class SlideshowFragment extends Fragment implements OnMapReadyCallback {
 
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(mDefaultLocation);
-        markerOptions.title("위치정보 가져올 수 없음");
-        markerOptions.snippet("위치 퍼미션과 GPS 활성 여부 확인하세요");
+        markerOptions.title("위치정보를 찾을 수 없음");
+        markerOptions.snippet("위치 정보 동의를 확인하세요.");
         markerOptions.draggable(true);
         markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
         currentMarker = mMap.addMarker(markerOptions);
@@ -192,13 +192,13 @@ public class SlideshowFragment extends Fragment implements OnMapReadyCallback {
         try {
             addressList = geocoder.getFromLocation(latlng.latitude, latlng.longitude, 1);
         } catch (IOException e) {
-            Toast.makeText(mContext, "위치로부터 주소를 인식할 수 없습니다. 네트워크가 연결되어 있는지 확인해 주세요.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mContext, "네트워크 연결 확인.", Toast.LENGTH_SHORT).show();
             e.printStackTrace();
-            return "주소 인식 불가";
+            return "주소 확인 X";
         }
 
         if (addressList.size() < 1) { // 주소 리스트가 비어있는지 비어 있으면
-            return "해당 위치에 주소 없음";
+            return "주소 확인 X";
         }
 
         // 주소를 담는 문자열을 생성하고 리턴
@@ -334,11 +334,11 @@ public class SlideshowFragment extends Fragment implements OnMapReadyCallback {
             Log.d(TAG, "onResume : requestLocationUpdates");
             if (ActivityCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 // TODO: Consider calling
-                //    ActivityCompat#requestPermissions
-                // here to request the missing permissions, and then overriding
-                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                //                                          int[] grantResults)
-                // to handle the case where the user grants the permission. See the documentation
+                //                //    ActivityCompat#requestPermissions
+                //                // here to request the missing permissions, and then overriding
+                //                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                //                //                                          int[] grantResults)
+                //                // to handle the case where the user grants the permission. See the documentation
                 // for ActivityCompat#requestPermissions for more details.
                 return;
             }
@@ -371,7 +371,7 @@ public class SlideshowFragment extends Fragment implements OnMapReadyCallback {
 
     @Override
     public void onDestroy() {
-        // Destroy 할 때는, 반대로 OnDestroyView에서 View를 제거하고, OnDestroy()를 호출한다.
+        // OnDestroy()를 호출한다.
         super.onDestroy();
         mapView.onDestroy();
     }

@@ -18,7 +18,7 @@
             android:title="고객 문의" />
         <item
             android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="옵션" />
+            android:icon="@drawable/itso_one"
+            android:title="지도" />
     </group>
 </menu>
