@@ -37,13 +37,14 @@ import java.util.TimerTask;
 public class LoginActivity extends AppCompatActivity implements VariableInterface{
     private static final int SMS_SEND_PERMISSON = 1;
     SmsManager mSMSManager;
-    Button btnSend;
+    Button btnSend,test;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         mSMSManager = SmsManager.getDefault();
         btnSend = (Button) findViewById(R.id.sms);
+        test =(Button) findViewById(R.id.test);
         //권한이 부여되어 있는지 확인
         int permissioncheck = ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS);
 
@@ -57,6 +58,14 @@ public class LoginActivity extends AppCompatActivity implements VariableInterfac
             }
             ActivityCompat.requestPermissions(this, new String[]{ Manifest.permission.SEND_SMS}, SMS_SEND_PERMISSON);
         }
+        /*test.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent intent = new Intent(getApplicationContext(),BluetoothPairingActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });*/
         btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -85,6 +94,12 @@ public class LoginActivity extends AppCompatActivity implements VariableInterfac
     public void clicklogin(View v)
     {
         onLogin();
+    }
+    public void clickbluetooth(View v)
+    {
+        Intent intent = new Intent(this,BluetoothPairingActivity.class);
+        startActivity(intent);
+        finish();
     }
     public void clickresister(View v)
     {
