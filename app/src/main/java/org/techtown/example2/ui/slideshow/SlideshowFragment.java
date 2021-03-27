@@ -51,7 +51,6 @@ import java.util.Locale;
 
 public class SlideshowFragment extends Fragment implements OnMapReadyCallback {
     private FragmentActivity mContext;
-    public static SlideshowFragment context_main;
     private static final String TAG = SlideshowFragment.class.getSimpleName();
     private GoogleMap mMap;
     private MapView mapView = null;
@@ -86,7 +85,6 @@ public class SlideshowFragment extends Fragment implements OnMapReadyCallback {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        context_main = this;
         // 초기화 해야 하는 리소스들을 여기서 초기화 해준다.
     }
 
@@ -332,16 +330,6 @@ public class SlideshowFragment extends Fragment implements OnMapReadyCallback {
         mapView.onResume();
         if (mLocationPermissionGranted) {
             Log.d(TAG, "onResume : requestLocationUpdates");
-            if (ActivityCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                // TODO: Consider calling
-                //                //    ActivityCompat#requestPermissions
-                //                // here to request the missing permissions, and then overriding
-                //                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                //                //                                          int[] grantResults)
-                //                // to handle the case where the user grants the permission. See the documentation
-                // for ActivityCompat#requestPermissions for more details.
-                return;
-            }
             mFusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallback, null);
             if (mMap!=null)
                 mMap.setMyLocationEnabled(true);

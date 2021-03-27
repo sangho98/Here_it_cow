@@ -33,13 +33,12 @@ import java.net.URLEncoder;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment<check> extends Fragment {
 
     private HomeViewModel homeViewModel;
     TextView textView;
     TextView textView2;
     String str;
-
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
@@ -98,6 +97,7 @@ public class HomeFragment extends Fragment {
 
         return root;
     }
+
     private static String getTagValue(String tag, Element eElement){
         NodeList nlList = eElement.getElementsByTagName(tag).item(0).getChildNodes();
         Node nValue = (Node)nlList.item(0);

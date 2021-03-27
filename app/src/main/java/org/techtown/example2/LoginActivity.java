@@ -1,5 +1,6 @@
 package org.techtown.example2;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,6 +24,7 @@ import android.os.StrictMode;
 import android.telephony.SmsManager;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.inputmethod.InlineSuggestionsRequest;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -36,6 +38,12 @@ import java.util.TimerTask;
 
 public class LoginActivity extends AppCompatActivity implements VariableInterface{
     private static final int SMS_SEND_PERMISSON = 1;
+    private static final int ACCESS_FINE_LOCATION_PERMISSON = 1;
+    //private static final int PERMISSIONS_REQUEST_READ_LOCATION = 1;
+    /*private String[] PERMISSIONS = {
+            Manifest.permission.ACCESS_COARSE_LOCATION,
+            Manifest.permission.ACCESS_FINE_LOCATION
+    };*/
     SmsManager mSMSManager;
     Button btnSend,test;
     @Override
@@ -58,6 +66,7 @@ public class LoginActivity extends AppCompatActivity implements VariableInterfac
             }
             ActivityCompat.requestPermissions(this, new String[]{ Manifest.permission.SEND_SMS}, SMS_SEND_PERMISSON);
         }
+
         /*test.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
@@ -66,6 +75,7 @@ public class LoginActivity extends AppCompatActivity implements VariableInterfac
                 finish();
             }
         });*/
+
         btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -77,9 +87,27 @@ public class LoginActivity extends AppCompatActivity implements VariableInterfac
             StrictMode.setThreadPolicy(policy);
         }
     }
+
+    /*public  void  OnCheckPermission(){
+        if(ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(this,Manifest.permission.ACCESS_COARSE_LOCATION)!= PackageManager.PERMISSION_GRANTED){
+            if(ActivityCompat.shouldShowRequestPermissionRationale(this,Manifest.permission.ACCESS_FINE_LOCATION)){
+                Toast.makeText(this,"앱 실행을 위해서는 권한을 설정해야합니다.",Toast.LENGTH_SHORT).show();
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},
+                        PERMISSIONS_REQUEST_READ_LOCATION);
+            }
+            else{
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION},
+                        PERMISSIONS_REQUEST_READ_LOCATION);
+            }
+        }
+    }*/
+
     public void sendSms() {
         String phoneNo = "01041565974";
-        String sms = ((SlideshowFragment)SlideshowFragment.context_main).location2;
+        //String sms = ((SlideshowFragment)SlideshowFragment.context_main).location2;
+        String sms = "HI";
         try {
             SmsManager smsManager = SmsManager.getDefault();
             smsManager.sendTextMessage(phoneNo, null, sms, null, null);
@@ -163,6 +191,7 @@ public class LoginActivity extends AppCompatActivity implements VariableInterfac
                     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
                     @Override
                     public void run() {
+
                         ad.dismiss();
                     }
                 };
