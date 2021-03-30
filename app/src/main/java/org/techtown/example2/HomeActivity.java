@@ -26,6 +26,7 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.navigation.NavController;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -48,8 +49,10 @@ import java.util.Locale;
 
 public class HomeActivity extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration;
-
+    private int MY_PERMISSIONS_REQUEST_LOCATION = 10;
     //private FragmentPagerAdapter fragmentPagerAdapter;
+    String lo_cation;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,10 +70,48 @@ public class HomeActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, MY_PERMISSIONS_REQUEST_LOCATION);
+        LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+        LocationListener locationListener = new LocationListener() {
+            public void onLocationChanged(android.location.Location location) {
 
+                lo_cation = getLocation(location.getLatitude(), location.getLongitude());
+                Toast.makeText(getApplicationContext(), lo_cation,Toast.LENGTH_SHORT).show();
+            }
+
+            public void onStatusChanged(String provider, int status,
+                                        Bundle extras) {
+            }
+
+            public void onProviderEnabled(String provider) {
+
+            }
+
+            public void onProviderDisabled(String provider) {
+            }
+        };
+
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 100, locationListener);
     }
 
+    public String getLocation(double lat, double lng){
+        String str = null;
+        Geocoder geocoder = new Geocoder(this, Locale.KOREA);
 
+        List<Address> address;
+        try {
+            if (geocoder != null) {
+                address = geocoder.getFromLocation(lat, lng, 1);
+                if (address != null && address.size() > 0) {
+                    str = address.get(0).getAddressLine(0).toString();
+                }
+            }
+        } catch (IOException e) {
+            Log.e("MainActivity", "주소를 찾지 못하였습니다.");
+            e.printStackTrace();
+        }
+        return str;
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
