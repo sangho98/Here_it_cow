@@ -38,85 +38,23 @@ import java.util.TimerTask;
 
 public class LoginActivity extends AppCompatActivity implements VariableInterface{
     private static final int SMS_SEND_PERMISSON = 1;
+    private int MY_PERMISSIONS_REQUEST_LOCATION = 10;
     private static final int ACCESS_FINE_LOCATION_PERMISSON = 1;
-    //private static final int PERMISSIONS_REQUEST_READ_LOCATION = 1;
-    /*private String[] PERMISSIONS = {
-            Manifest.permission.ACCESS_COARSE_LOCATION,
-            Manifest.permission.ACCESS_FINE_LOCATION
-    };*/
-    SmsManager mSMSManager;
-    Button btnSend,test;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        mSMSManager = SmsManager.getDefault();
-        btnSend = (Button) findViewById(R.id.sms);
-        test =(Button) findViewById(R.id.test);
-        //권한이 부여되어 있는지 확인
-        int permissioncheck = ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS);
 
-        if(permissioncheck  == PackageManager.PERMISSION_GRANTED){
-            Toast.makeText(getApplicationContext(), "SMS 수신권한 있음", Toast.LENGTH_SHORT).show();
-        }else{
-            Toast.makeText(getApplicationContext(), "SMS 수신권한 없음", Toast.LENGTH_SHORT).show();
-
-            if(ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.SEND_SMS)){
-                Toast.makeText(getApplicationContext(), "SMS권한이 필요합니다", Toast.LENGTH_SHORT).show();
-            }
-            ActivityCompat.requestPermissions(this, new String[]{ Manifest.permission.SEND_SMS}, SMS_SEND_PERMISSON);
-        }
-
-        /*test.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                Intent intent = new Intent(getApplicationContext(),BluetoothPairingActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });*/
-
-        btnSend.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sendSms();
-            }
-        });
         if (android.os.Build.VERSION.SDK_INT > 9) {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
         }
     }
 
-    /*public  void  OnCheckPermission(){
-        if(ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(this,Manifest.permission.ACCESS_COARSE_LOCATION)!= PackageManager.PERMISSION_GRANTED){
-            if(ActivityCompat.shouldShowRequestPermissionRationale(this,Manifest.permission.ACCESS_FINE_LOCATION)){
-                Toast.makeText(this,"앱 실행을 위해서는 권한을 설정해야합니다.",Toast.LENGTH_SHORT).show();
-                ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},
-                        PERMISSIONS_REQUEST_READ_LOCATION);
-            }
-            else{
-                ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION},
-                        PERMISSIONS_REQUEST_READ_LOCATION);
-            }
-        }
-    }*/
 
     public void sendSms() {
-        String phoneNo = "01041565974";
-        //String sms = ((SlideshowFragment)SlideshowFragment.context_main).location2;
-        String sms = "HI";
-        try {
-            SmsManager smsManager = SmsManager.getDefault();
-            smsManager.sendTextMessage(phoneNo, null, sms, null, null);
-            Toast.makeText(getApplicationContext(), "전송 완료!", Toast.LENGTH_LONG).show();
-        } catch (Exception e) {
-            Toast.makeText(getApplicationContext(), "전송 오류!", Toast.LENGTH_LONG).show();
-            Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_LONG).show();//오류 원인이 찍힌다.
-            e.printStackTrace();
-        }
+
     }
 
     public void clicklogin(View v)
@@ -125,9 +63,7 @@ public class LoginActivity extends AppCompatActivity implements VariableInterfac
     }
     public void clickbluetooth(View v)
     {
-        Intent intent = new Intent(this,BluetoothPairingActivity.class);
-        startActivity(intent);
-        finish();
+
     }
     public void clickresister(View v)
     {
@@ -158,6 +94,7 @@ public class LoginActivity extends AppCompatActivity implements VariableInterfac
             toast.show();
         }else if(statusCode.get(0) == 666){
             //로그인 성공 status
+            uid.add(ID);
             Intent intent = new Intent(this, HomeActivity.class);
             startActivity(intent);
             finish();
@@ -166,46 +103,7 @@ public class LoginActivity extends AppCompatActivity implements VariableInterfac
     }
     public void onPopup(View v)
     {
-        AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this, R.style.MyCustomDialogStyle);
-        builder.setMessage("메세지를 보냅니다.");
-        builder.setPositiveButton("닫기", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-            }
-        });
-        builder.setTitle("경고");
-        builder.setIcon(R.drawable.warming);
-        AlertDialog ad = builder.create();
-        ad.show();
-        //ad.getWindow().setBackgroundDrawable(new ColorDrawable(Color.argb(255,62,79,92)));
-        ad.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-        Button nbotton = ad.getButton(DialogInterface.BUTTON_POSITIVE);
-        nbotton.setTextColor(Color.WHITE);
 
-
-        Thread thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                TimerTask task = new TimerTask() {
-                    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-                    @Override
-                    public void run() {
-
-                        ad.dismiss();
-                    }
-                };
-                Timer timer = new Timer();
-                timer.schedule(task,3000);
-            }
-        });
-        thread.start();
-    }
-
-    public void clicklocation(View view){
-        Intent intent = new Intent(this, Location.class);
-        startActivity(intent);
-        finish();
     }
 
 }

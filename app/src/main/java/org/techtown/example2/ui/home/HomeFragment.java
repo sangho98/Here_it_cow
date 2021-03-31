@@ -1,44 +1,39 @@
 package org.techtown.example2.ui.home;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.util.Log;
+import android.os.StrictMode;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import org.techtown.example2.MainActivity;
+import org.techtown.example2.HttpRequest;
 import org.techtown.example2.R;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserFactory;
 
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.URL;
-import java.net.URLEncoder;
+import java.util.HashMap;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
-public class HomeFragment<check> extends Fragment {
+import app.akexorcist.bluetotohspp.library.BluetoothSPP;
 
+
+public class HomeFragment extends Fragment {
+
+    private BluetoothSPP bt;
     private HomeViewModel homeViewModel;
     TextView textView;
     TextView textView2;
     String str;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
@@ -48,6 +43,13 @@ public class HomeFragment<check> extends Fragment {
 
         int count = 1;
         textView2 = root.findViewById(R.id.infor);
+
+
+        if (android.os.Build.VERSION.SDK_INT > 9) {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+        }
+
         try{
             String url = "http://data.ex.co.kr/openapi/burstInfo/realTimeSms?key=1931974769&type=xml&numOfRows=12&pageNo=3&sortType=desc&pagingYn=Y";
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -91,12 +93,17 @@ public class HomeFragment<check> extends Fragment {
         {
             e.printStackTrace();
         }
+        String url = "http://hereitcow.ga/board/notice";
+        HashMap<String, String> map = new HashMap<>();
+
+        String result = HttpRequest.postRequest(url,map);
         TextView gongji = root.findViewById(R.id.gongji);
-        gongji.setText("아아아아아아아아아아아   와와와와오아ㅗㅇㅇ아앙   ㅇ리리릴리ㅣ리리");
+        gongji.setText(result);
         gongji.setSelected(true);
 
         return root;
     }
+
 
     private static String getTagValue(String tag, Element eElement){
         NodeList nlList = eElement.getElementsByTagName(tag).item(0).getChildNodes();
@@ -107,7 +114,6 @@ public class HomeFragment<check> extends Fragment {
         }
         return nValue.getNodeValue();
     }
-
 
 
 }

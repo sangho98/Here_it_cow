@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,6 +19,7 @@ import androidx.lifecycle.ViewModelProvider;
 import org.techtown.example2.HttpRequest;
 import org.techtown.example2.R;
 
+import java.io.IOException;
 import java.util.HashMap;
 
 public class GalleryFragment extends Fragment {
@@ -48,7 +50,17 @@ public class GalleryFragment extends Fragment {
                 map.put("title",title.getText().toString());
                 map.put("content",content.getText().toString());
 
-                String result = HttpRequest.postRequest(url,map);
+                try {
+                    String result = HttpRequest.postRequest(url, map);
+
+                    title.setText("");
+                    content.setText("");
+                    Toast.makeText(root.getContext(), "문의 접수가 완료되었습니다. ", Toast.LENGTH_LONG).show();
+
+
+                } finally {
+
+                }
             }
         });
 

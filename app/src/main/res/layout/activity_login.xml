@@ -92,46 +92,5 @@
         app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName5"
         app:layout_constraintVertical_bias="0.0" />
 
-    <Button
-        android:id="@+id/popup"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="팝업"
-        android:onClick="onPopup"
-        app:backgroundTint="#5F6185"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.953" />
-
-    <Button
-        android:id="@+id/test"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="3dp"
-        android:layout_marginRight="3dp"
-        android:layout_marginBottom="10dp"
-        android:onClick="clickbluetooth"
-        android:text="블루투스"
-        app:backgroundTint="#5F6185"
-        app:layout_constraintBottom_toTopOf="@+id/imageView2"
-        app:layout_constraintEnd_toStartOf="@+id/imageView2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-    <Button
-        android:id="@+id/sms"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="SMS 보내기"
-        app:backgroundTint="#5F6185"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.643"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.953" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

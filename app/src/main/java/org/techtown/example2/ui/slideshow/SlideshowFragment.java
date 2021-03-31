@@ -42,6 +42,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
 import org.techtown.example2.R;
+import org.techtown.example2.VariableInterface;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -49,7 +50,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-public class SlideshowFragment extends Fragment implements OnMapReadyCallback {
+public class SlideshowFragment extends Fragment implements OnMapReadyCallback, VariableInterface {
     private FragmentActivity mContext;
     private static final String TAG = SlideshowFragment.class.getSimpleName();
     private GoogleMap mMap;
@@ -225,12 +226,10 @@ public class SlideshowFragment extends Fragment implements OnMapReadyCallback {
                         = new LatLng(location.getLatitude(), location.getLongitude());
 
                 String markerTitle = "현재 위치";
-                String markerSnippet = getCurrentAddress(currentPosition);
-                getLocation(markerSnippet);
-                Log.d(TAG, "Time :" + CurrentTime() + " onLocationResult : " + markerSnippet);
+
 
                 //현재 위치에 마커 생성하고 이동
-                setCurrentLocation(location, markerTitle, markerSnippet);
+                //setCurrentLocation(location, markerTitle, markerSnippet);
                 mCurrentLocatiion = location;
             }
         }
@@ -330,9 +329,12 @@ public class SlideshowFragment extends Fragment implements OnMapReadyCallback {
         mapView.onResume();
         if (mLocationPermissionGranted) {
             Log.d(TAG, "onResume : requestLocationUpdates");
+            /*
             mFusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallback, null);
             if (mMap!=null)
                 mMap.setMyLocationEnabled(true);
+
+             */
         }
     }
 
